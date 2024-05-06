@@ -1,3 +1,12 @@
+
+"""
+Module that initiate or use an existing database.
+
+Define a relational database.
+
+Define an engine and a session function binded to it.
+"""
+
 from sqlalchemy import create_engine, Column, Integer, String, Boolean, Enum, DateTime, ForeignKey, func
 from sqlalchemy.orm import sessionmaker, relationship, Session, DeclarativeBase, Mapped, mapped_column
 from sqlalchemy.exc import SQLAlchemyError
