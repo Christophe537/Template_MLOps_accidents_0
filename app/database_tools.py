@@ -1,3 +1,7 @@
+"""
+Module to interact with database : create, update, delete, get a user, get all database users
+"""
+
 from sqlalchemy.orm import Session
 from sqlalchemy import exc
 import database, models
@@ -65,7 +69,6 @@ def get_user(db: Session, username: str, email: str, raise_exception: bool = Tru
         Status 400 for an unknown user.
     """
     # Query the user in table User
-    # See filter operators here : https://www.tutorialspoint.com/sqlalchemy/sqlalchemy_orm_filter_operators.htm
     user = db.query(database.User).filter(database.User.username == username, database.User.email == email)  # .first()
     if user is None and raise_exception:
         raise HTTPException(status_code=404, detail="User not found")
@@ -109,7 +112,7 @@ def get_all_users(db: Session, raise_exception: bool = True):
 
 def update_user(db: Session, identifier: str, user_update: models.userUpdateInDB):
     """
-    Update an existing user in the database based on its id in table User
+    Update an existing user in the database based on its id in table User.
     
     ARGS:
         - db: Session
@@ -148,10 +151,9 @@ def update_user(db: Session, identifier: str, user_update: models.userUpdateInDB
         raise HTTPException(status_code=500, detail="Error when updating user.")
 
 
-
 def delete_user(db: Session, identifier: str):
     """
-    Delete an exsiting user in the database based on its id in table User.
+    Delete an existing user in the database based on its id in table User.
     
     ARGS:
         - db: Session
