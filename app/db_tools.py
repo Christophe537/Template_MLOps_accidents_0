@@ -50,17 +50,17 @@ def create_user(db: Session, user: models.userCreateInDB):
         raise HTTPException(status_code=500, detail=f"Error when creating user.: {str(e)}")
     
 
-def get_user(db: Session, username: str, email: str, raise_exception: bool = True):
+def get_user(db: Session, username: str, password: str, raise_exception: bool = True):
     """
-    Retrieve a user with its username and hashed password (this couple is a foreign key).
+    Retrieve a user with its username and password (this couple is unique).
 
     ARGS:
         - db: Session
             The database session. 
         - username: str
             The searched username.
-        - email: str
-            The user's email.
+        - password: str
+            The user's password
 
     RETURN: models.userInDB
         The researched user grasped in the database.
@@ -69,7 +69,8 @@ def get_user(db: Session, username: str, email: str, raise_exception: bool = Tru
         Status 400 for an unknown user.
     """
     # Query the user in table User
-    user = db.query(database.User).filter(database.User.username == username, database.User.email == email)  # .first()
+    user = db.query(database.User).filter(database.User.username == username, 
+                                          database.User.hashed_password == hash_password(password))  # .first()
     if user is None and raise_exception:
         raise HTTPException(status_code=404, detail="User not found")
     if len(user) > 1:
