@@ -1,5 +1,5 @@
 """
-Module for API that provides then following roads:
+Module for API that provides then following routes:
 - Start up and shut down events management 
 - Ping the API (Get)  
 - Get API info (Get)
