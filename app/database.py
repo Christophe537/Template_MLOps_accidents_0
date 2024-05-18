@@ -102,6 +102,7 @@ Base.metadata.create_all(engine)
 
 # Use a parametrized connection for any calls and bind it with engine
 # sessionmaker is more structured than session (from sqlalchemy.orm)
+# Connect to the local database
 SessionLocal  = sessionmaker(autocommit=False, autoflush=False, bind=engine)
 session = Session(bind=engine)
 
