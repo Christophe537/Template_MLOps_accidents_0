@@ -257,3 +257,19 @@ async def backup(form_data: OAuth2PasswordRequestForm = Depends(),db: Session = 
     # Save in destination directory
     shutil.copy(source_dir, destination_dir)
 
+# Unsave current model and retrieve current model
+@api.post("/reverse_backup", tags=["Model features"])
+async def backup(form_data: OAuth2PasswordRequestForm = Depends(),db: Session = Depends(database.query_db)):
+    user = db_tools.get_user(db, form_data.username, form_data.password)
+    if not user:
+        raise HTTPException(status_code=400, detail="Incorrect username or password")
+    
+    # Get the sources where current model is stored
+    source_dir = list(Path('./src/models/archives/').interdir())[0]  # Take the first available file in archive
+    
+    # Create / use a path where to archive the current trained model
+    destination_dir = Path(f'./src/models/')
+
+    # Save in destination directory
+    shutil.copy(source_dir, destination_dir)
+
