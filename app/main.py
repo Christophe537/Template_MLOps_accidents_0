@@ -36,6 +36,7 @@ from src.data import import_raw_data, make_dataset
 from src.models import train_model, predict_model
 import json
 import pandas as pd
+import shutil
 
 # Load .env file variables to the current working environement.
 load_dotenv()
@@ -219,18 +220,40 @@ async def predict(file_to_load_path: str,
     # Compute prediction on provided features
     return predict_model.predict_model(features)
 
+
 # Get accuracy of the current model 
 @api.get("/accuracy", tags=["Model features"])
 async def model_accuracy(form_data: OAuth2PasswordRequestForm = Depends(),db: Session = Depends(database.query_db)):
     user = db_tools.get_user(db, form_data.username, form_data.password)
     if not user:
         raise HTTPException(status_code=400, detail="Incorrect username or password")
+    
     loaded_model = predict_model.loaded_model
+    
     try:
         X_test = pd.read_csv('data/preprocessed/X_test.csv')
         y_test = pd.read_csv('data/preprocessed/y_test.csv')
+        return loaded_model.score(X_test, y_test)
     except Exception as e:
         raise HTTPException(status_code=404, detail=f"X_test or y_test are not available in data/preprocessed/ with Error: {str(e)}")
-    return loaded_model.score(X_test, y_test)
+    
 
+# Save current model as a backup
+@api.post("/backup", tags=["Model features"])
+async def backup(form_data: OAuth2PasswordRequestForm = Depends(),db: Session = Depends(database.query_db)):
+    user = db_tools.get_user(db, form_data.username, form_data.password)
+    if not user:
+        raise HTTPException(status_code=400, detail="Incorrect username or password")
+    
+    # Get the sources where current model is stored
+    source_dir = Path('./src/models/trained_model.joblib')
+    datetime_now = dt.now().strftime('%Y%m%d%H%M%S')
+    
+    
+    # Create / use a path where to archive the current trained model
+    destination_dir = Path(f'./src/models/archives/archive -{datetime_now}')
+    destination_dir.mkdir(parents=True, exist_ok=True)
+
+    # Save in destination directory
+    shutil.copy(source_dir, destination_dir)
 
