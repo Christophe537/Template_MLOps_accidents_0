@@ -218,7 +218,7 @@ async def predict(file_to_load_path: str,
             raise HTTPException(status_code=404, detail=f"Unable to load features from provided file path: {str(e)}")
           
     # Compute prediction on provided features
-    return predict_model.predict_model(features)
+    return {"prediction": predict_model.predict_model(features)}
 
 
 # Get accuracy of the current model 
@@ -233,7 +233,7 @@ async def model_accuracy(form_data: OAuth2PasswordRequestForm = Depends(),db: Se
     try:
         X_test = pd.read_csv('data/preprocessed/X_test.csv')
         y_test = pd.read_csv('data/preprocessed/y_test.csv')
-        return loaded_model.score(X_test, y_test)
+        return {"accuracy": loaded_model.score(X_test, y_test)}
     except Exception as e:
         raise HTTPException(status_code=404, detail=f"X_test or y_test are not available in data/preprocessed/ with Error: {str(e)}")
     
