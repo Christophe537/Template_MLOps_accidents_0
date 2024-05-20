@@ -192,8 +192,9 @@ async def train(form_data: OAuth2PasswordRequestForm = Depends(), db: Session = 
     print("Model has been trained with success been saved in folder: ./src/models")
 
 # Make a prediction based on features file given by user (file_to_load_path as a json file) or not (in that case, he must fill up features manually).
+# If no path provided then the user can enter features manually.
 api.post("/prediction/{file_to_load_path}", tags=["Model features"])
-async def train(file_to_load_path: str, 
+async def predict(file_to_load_path: str, 
                 form_data: OAuth2PasswordRequestForm = Depends(),
                  db: Session = Depends(database.query_db)):
                    
