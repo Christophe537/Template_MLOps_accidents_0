@@ -195,13 +195,12 @@ async def train(form_data: OAuth2PasswordRequestForm = Depends(), db: Session = 
 # Make a prediction based on features file given by user (file_to_load_path as a json file) or not (in that case, he must fill up features manually).
 # If no path provided then the user can enter features manually.
 api.post("/prediction/{file_to_load_path}", tags=["Model features"])
-async def predict(file_to_load_path: str, 
-                form_data: OAuth2PasswordRequestForm = Depends(),
-                 db: Session = Depends(database.query_db)):
-                   
-    user = db_tools.get_user(db, form_data.username, form_data.password)
-    if not user:
-        raise HTTPException(status_code=400, detail="Incorrect username or password")
+async def predict(file_to_load_path: str,
+                  db: Session = Depends(database.query_db),
+                  user: models.userInDB = Depends(get_user_with_token)):
+    # Check that user is Admin
+    if user.role not in [db_models.Role.admin]:
+        raise HTTPException(status_code=status.HTTP_403_FORBIDDEN, detail="Access denied. Only Admin has access.")
       
     # If any file path is provided by user => he has to enter feature values manually
     if file_to_load_path is None:
