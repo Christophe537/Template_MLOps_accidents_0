@@ -163,7 +163,6 @@ The Airflow interface can be accessed at http://0.0.0.0:8080/. You can access th
 
 - The retraining workflow is organized as follows: 
 
-![Workflow AirFlow](src/docs_files/workflow_airflow.png)
 
 - Once you are in Airflow, go to 'dags' directory in the UI. Then copy and paste file ./src/workflow/model_maintenance and wait a little bit for embedding.
     Then your DAG is ready to run.
