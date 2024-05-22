@@ -56,7 +56,7 @@ Project Organization
 
 ---------
 
-## Steps to follow to use code directly
+## Steps to follow to use source code (src) code directly
 
 Convention : All python scripts must be run from the root specifying the relative file path.
 
