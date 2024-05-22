@@ -1,7 +1,7 @@
-Project Name
-==============================
+CAR CRASH TYPE CLASSIFIER BY LOCATION
+=====================================
 
-This project is a starting Pack for MLOps projects based on the subject "road accident". It's not perfect so feel free to make some modifications on it.
+This project is a starting Pack for MLOps projects based on the subject "road accident".
 
 Project Organization
 ------------
@@ -15,43 +15,43 @@ Project Organization
     ├── app                         <- API folder
     │   ├── Dockerfile              <- Dockerfile for building the Docker image of the API.
     │   ├── Tests                   <- Directory for API unit tests.
-│   │   └── test_api.py         <- Test file for the API ran by unit_tests.yml above on Push in github.
-│   ├── __init__.py             <- File that permits app to be used such as a module.
-│   ├── db_tools.py             <- Functions to access database - for users management by the API.
-│   ├── database.py             <- Relationnal database containing data on users.
-│   ├── main.py                 <- API routes that will run on local host using port 8000
-│   ├── models.py               <- ORM models to interact with database.
-│   ├── requirements.txt        <- Versionning file for the API environment.
-│   ├── router.py               <- Sub API containing routes for users management only.
-│   └── security_center.py      <- Security functions based on Oauth2.
-├── docker-compose.yml          <- Docker Compose configuration file for deploying the application.
-├── workflow                    <- Airflow Directory
-│   └── model_maintenance.py    <- File to copy/paste in Airflow's dags directory.
-├── init_airflow_variables.sh   <- Script to initialize environment variables for Airflow package.
-├── logs                        <- Directory for training logs.
-├── models                      <- Directory for trained and serialized models, model predictions, or model summaries.
-├── setup.py                    <- Configuration file for package installation.
-└── src                         <- Source code for this project.
-    ├── __init__.py
-    ├── config                  <- Configuration files for the project.
-    ├── docs_files              <- Documentation files for the project.
-    │   └── workflow.png        <- Image of the Airflow workflow.
-    ├── features                <- Scripts to turn raw data into features for modeling.
-    │   └── build_features.py   <- Script for building features.
-    ├── data                    <- Scripts to load and process data
-    │   ├── __init__.py         
-    │   ├── check_structure.py  <- Check file and directory existence
-    │   ├── import_raw_data.py  <- import Car Accidents raw data from Amazon AWS 
-    │   └── make_dataset.py     <- Copy data and upload environement variables
-    ├── main.py                 <- Scripts to train models.
-    ├── models                  <- Scripts to train models.
-    │   ├── __init__.py
-    │   ├── predict_model.py    <- Script for making predictions (from a json file of features or manually).
-    │   ├── test_features.json  <- json file containing an example of features
-    │   └── train_model.py      <- Script to train a model and save it on ./src/models/
-    └── visualization           <- Scripts for data visualization and model results visualization.
+    │   │   └── test_api.py         <- Test file for the API ran by unit_tests.yml above on Push in github.
+    │   ├── __init__.py             <- File that permits app to be used such as a module.
+    │   ├── db_tools.py             <- Functions to access database - for users management by the API.
+    │   ├── database.py             <- Relationnal database containing data on users.
+    │   ├── main.py                 <- API routes that will run on local host using port 8000
+    │   ├── models.py               <- ORM models to interact with database.
+    │   ├── requirements.txt        <- Versionning file for the API environment.
+    │   ├── router.py               <- Sub API containing routes for users management only.
+    │   └── security_center.py      <- Security functions based on Oauth2.
+    ├── docker-compose.yml          <- Docker Compose configuration file for deploying the application.
+    ├── workflow                    <- Airflow Directory
+    │   └── model_maintenance.py    <- File to copy/paste in Airflow's dags directory.
+    ├── init_airflow_variables.sh   <- Script to initialize environment variables for Airflow package.
+    ├── logs                        <- Directory for training logs.
+    ├── models                      <- Directory for trained and serialized models, model predictions, or model summaries.
+    ├── setup.py                    <- Configuration file for package installation.
+    └── src                         <- Source code for this project.
         ├── __init__.py
-        └── visualize.py       <- Script for data visualization.
+        ├── config                  <- Configuration files for the project.
+        ├── docs_files              <- Documentation files for the project.
+        │   └── workflow.png        <- Image of the Airflow workflow.
+        ├── features                <- Scripts to turn raw data into features for modeling.
+        │   └── build_features.py   <- Script for building features.
+        ├── data                    <- Scripts to load and process data
+        │   ├── __init__.py         
+        │   ├── check_structure.py  <- Check file and directory existence
+        │   ├── import_raw_data.py  <- import Car Accidents raw data from Amazon AWS 
+        │   └── make_dataset.py     <- Copy data and upload environement variables
+        ├── main.py                 <- Scripts to train models.
+        ├── models                  <- Scripts to train models.
+        │   ├── __init__.py
+        │   ├── predict_model.py    <- Script for making predictions (from a json file of features or manually).
+        │   ├── test_features.json  <- json file containing an example of features
+        │   └── train_model.py      <- Script to train a model and save it on ./src/models/
+        └── visualization           <- Scripts for data visualization and model results visualization.
+            ├── __init__.py
+            └── visualize.py        <- Script for data visualization.
    
 
 ---------
