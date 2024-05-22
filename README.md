@@ -163,8 +163,7 @@ The Airflow interface can be accessed at http://0.0.0.0:8080/. You can access th
 
 - The retraining workflow is organized as follows: 
 
-![image](https://github.com/Christophe537/Template_MLOps_accidents_0/assets/153123799/afa13945-e6f5-4f20-aa43-484a55f6c117)
-
+![image](https://github.com/Christophe537/Template_MLOps_accidents_0/assets/153123799/e6f49557-5487-4984-90d7-3c1411f46ca4)
 
 - Once you are in Airflow, go to 'dags' directory in the UI. Then copy and paste file ./src/workflow/model_maintenance and wait a little bit for embedding.
     Then your DAG is ready to run.
