@@ -56,7 +56,7 @@ Project Organization
 
 ---------
 
-## Steps to follow 
+## Steps to follow to use code directly
 
 Convention : All python scripts must be run from the root specifying the relative file path.
 
@@ -88,13 +88,84 @@ Convention : All python scripts must be run from the root specifying the relativ
   
   - Provide a json file as follow : 
 
-    
     `python ./src/models/predict_model.py ./src/models/test_features.json`
 
   test_features.json is an example that you can try 
 
   - If you do not specify a json file, you will be asked to enter manually each feature. 
 
+Prerequisite to use the application (app): creation of .env 
+-----------------------------------------------------------
+
+To run the application, you need to create a `.env` file at the root of the project with the following environment variables:
+
+    # API
+    SECRET_KEY=your_secret_key
+    DATABASE_URL=sqlite:///./users.db
+    ADMIN_USERNAME=admin
+    ADMIN_EMAIL=admin@admin.com
+    ADMIN_PASSWORD=your_admin_password
+
+    # Airflow
+    AIRFLOW__CORE__EXECUTOR=LocalExecutor
+    AIRFLOW__CORE__SQL_ALCHEMY_CONN=postgresql+psycopg2://airflow:your_airflow_password@postgres/airflow
+    AIRFLOW__CORE__FERNET_KEY=your_fernet_key
+    AIRFLOW__CORE__LOAD_EXAMPLES=false
+    _AIRFLOW_DB_UPGRADE=true
+    _AIRFLOW_WWW_USER_CREATE=true
+    _AIRFLOW_WWW_USER_USERNAME=admin
+    _AIRFLOW_WWW_USER_PASSWORD=your_airflow_admin_password
+
+    # SMTP pour Airflow
+    AIRFLOW__EMAIL__EMAIL_BACKEND=airflow.utils.email.send_email_smtp
+    AIRFLOW__SMTP__SMTP_HOST=smtp.gmail.com
+    AIRFLOW__SMTP__SMTP_STARTTLS=True
+    AIRFLOW__SMTP__SMTP_SSL=False
+    AIRFLOW__SMTP__SMTP_USER=your_email@gmail.com
+    AIRFLOW__SMTP__SMTP_PASSWORD=your_smtp_password
+    AIRFLOW__SMTP__SMTP_PORT=587
+    AIRFLOW__SMTP__SMTP_MAIL_FROM=your_email@gmail.com
+
+    # Postgres - DB AirFlow
+    POSTGRES_USER=airflow
+    POSTGRES_PASSWORD=your_postgres_password
+    POSTGRES_DB=airflow
+
+Docker Containers Setup and Execution
+------------------------------------
+
+1. Ensure Docker and Docker Compose are installed on your system.
+
+2. Use the provided script to set up Airflow variables:
+    - Run `chmod +x init_airflow_variables.sh` to make the script executable.
+    - Execute the script `./init_airflow_variables.sh` to generate `flow/airflow_variables.json`.
+
+3. Build and start the Docker containers with Docker Compose:
+    - Execute `docker-compose up --build` to build and start the containers.
+
+API Documentation
+-----------------
+
+Once the containers are running, the API is accessible at `http://0.0.0.0:8000/`. 
+
+- **Swagger UI**: Access the interactive API documentation at `http://0.0.0.0:8000/docs`. Swagger UI allows you to directly execute API calls from the browser.
+  
+- **ReDoc**: For a different documentation format, visit `http://0.0.0.0:8000/redoc`, which also provides a clear and organized interface for the API's endpoints and models.
+  
+- **OpenAPI Specification**: The OpenAPI specification file can be accessed directly at `http://0.0.0.0:8000/openapi.json`, providing a standard, language-agnostic interface to RESTful APIs.
+
+Airflow Documentation
+---------------------
+
+The Airflow interface can be accessed at http://0.0.0.0:8080/. You can access the workflow dedicated to retraining, logs and trigger tasks. 
+
+- The retraining workflow is organized as follows: 
+
+![Workflow AirFlow](src/docs_files/workflow_drawing.png)
+
+- Once you are in Airflow, go in 'dags' directory in the UI. Then copy and paste file ./src/workflow/model_maintenance and wait a little bit for embedding.
+   
+- Workflow documentation is available in the `DAG Docs` drop-down menu when you consult the DAG: model_retraining from the web interface. 
 
 ------------------------
 
