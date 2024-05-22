@@ -92,7 +92,9 @@ Convention : All python scripts must be run from the root specifying the relativ
 
   test_features.json is an example that you can try 
 
-  - If you do not specify a json file, you will be asked to enter manually each feature. 
+  - If you do not specify a json file, you will be asked to enter manually each feature.
+
+---------
 
 Prerequisite to use the application (app): creation of .env 
 -----------------------------------------------------------
@@ -131,8 +133,8 @@ To run the application, you need to create a `.env` file at the root of the proj
     POSTGRES_PASSWORD=your_postgres_password
     POSTGRES_DB=airflow
 
-Docker Containers Setup and Execution
-------------------------------------
+Docker Containers Setup and Execution to launch application (app)
+-----------------------------------------------------------------
 
 1. Ensure Docker and Docker Compose are installed on your system.
 
