@@ -5,15 +5,16 @@ This project is a starting Pack for MLOps projects based on the subject "road ac
 
 Project Organization
 ------------
-├── LICENSE
-├── README.md                   <- The top-level README for developers using this project.
-├── .github                     <- GitHub configuration folder.
-|   └── workflows               <- Workflows folder.
-|       ├── run_containers.yml  <- GitHub action to startup containers from the docker-compose file.
-|       └── unit_tests.yml      <- Github action to run unit tests.
-├── app                         <- API folder
-│   ├── Dockerfile              <- Dockerfile for building the Docker image of the API.
-│   ├── Tests                   <- Directory for API unit tests.
+
+    ├── LICENSE
+    ├── README.md                   <- The top-level README for developers using this project.
+    ├── .github                     <- GitHub configuration folder.
+    |   └── workflows               <- Workflows folder.
+    |       ├── run_containers.yml  <- GitHub action to startup containers from the docker-compose file.
+    |       └── unit_tests.yml      <- Github action to run unit tests.
+    ├── app                         <- API folder
+    │   ├── Dockerfile              <- Dockerfile for building the Docker image of the API.
+    │   ├── Tests                   <- Directory for API unit tests.
 │   │   └── test_api.py         <- Test file for the API ran by unit_tests.yml above on Push in github.
 │   ├── __init__.py             <- File that permits app to be used such as a module.
 │   ├── db_tools.py             <- Functions to access database - for users management by the API.
